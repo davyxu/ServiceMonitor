@@ -1,0 +1,7 @@
+﻿{
+"ColorTab":[
+{"KeyWords":"[ERROR]","C":"Red"},
+{"KeyWords":"[FATAL]","C":"Red"},
+{"KeyWords":"[WARN]","C":"Yellow"}
+]
+} 
