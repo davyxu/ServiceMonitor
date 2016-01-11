@@ -35,8 +35,33 @@ namespace ServiceMonitor
         {
             var ser = new JavaScriptSerializer();
 
-            var content = File.ReadAllText(filename, Encoding.UTF8);
-            var profile = ser.Deserialize<Profile>(content);
+            string content = string.Empty;
+            try
+            {
+                content = File.ReadAllText(filename, Encoding.UTF8);
+            }
+            catch( Exception )
+            {
+
+            }
+
+
+            Profile profile = null;
+
+            try
+            {
+                profile = ser.Deserialize<Profile>(content);    
+            }
+            catch ( Exception)
+            {
+                return;
+            }
+
+            if (profile== null)
+            {
+                return;
+            }
+            
 
             foreach( var tabInfo in profile.Tabs )
             {
