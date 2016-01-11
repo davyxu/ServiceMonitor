@@ -702,15 +702,12 @@ namespace ServiceMonitor
             {
                 _lastSearch = dialog.Content;
 
-                if (string.IsNullOrEmpty(dialog.Content))
-                {
-                    DismarkSearchLine();
-                }
-                else
+                DismarkSearchLine();
+
+                if (!string.IsNullOrEmpty(dialog.Content))
                 {
                     MarkSearchLine(dialog.Content);
-                }
-
+                }                
             }
         }
 
