@@ -37,6 +37,7 @@
             this.txtMain.Location = new System.Drawing.Point(0, 0);
             this.txtMain.Multiline = true;
             this.txtMain.Name = "txtMain";
+            this.txtMain.ReadOnly = true;
             this.txtMain.Size = new System.Drawing.Size(466, 211);
             this.txtMain.TabIndex = 0;
             // 
