@@ -25,11 +25,11 @@ namespace ServiceMonitor
 
         class Profile
         {
-            public List<TabInfo> Tabs = new List<TabInfo>();
-
+            public List<TabInfo> Tabs = new List<TabInfo>();            
         }
 
 
+        Profile _profile;
 
         void LoadSettings(string filename)
         {
@@ -46,24 +46,22 @@ namespace ServiceMonitor
             }
 
 
-            Profile profile = null;
-
             try
             {
-                profile = ser.Deserialize<Profile>(content);    
+                _profile = ser.Deserialize<Profile>(content);    
             }
             catch ( Exception)
             {
                 return;
             }
 
-            if (profile== null)
+            if (_profile == null)
             {
                 return;
             }
-            
 
-            foreach( var tabInfo in profile.Tabs )
+
+            foreach (var tabInfo in _profile.Tabs)
             {
                 CreateTab(tabInfo.FileName, tabInfo.Args);
             }
@@ -72,8 +70,7 @@ namespace ServiceMonitor
 
         void SaveSettings(string filename)
         {
-            Profile profile = new Profile();
-
+            _profile.Tabs.Clear();
             foreach (TabPage tab in tabMain.TabPages)
             {
                 var pipe = GetPipe(tab);
@@ -84,11 +81,11 @@ namespace ServiceMonitor
                 tabInfo.FileName = pipe.FileName;
                 tabInfo.Args = pipe.Args;
 
-                profile.Tabs.Add(tabInfo);
+                _profile.Tabs.Add(tabInfo);
             }
 
             var ser = new JavaScriptSerializer();
-            var content = ser.Serialize(profile);
+            var content = ser.Serialize(_profile);
 
             File.WriteAllText(filename, content, Encoding.UTF8);
         }
@@ -170,10 +167,22 @@ namespace ServiceMonitor
 
             tab.Controls.Add( text );
             tabMain.TabPages.Add(tab);
-            var pipe = new ProcessPipe(filename, arg, (ProcessStatus status, string msg) =>
+            var pipe = new ProcessPipe(filename, arg, (ProcessEvent e) =>
             {
-                ShowMessage(status, msg, tab);
-            });
+                if (e is ProcessLogData)
+                {
+                    var ev = e as ProcessLogData;
+
+                    if (string.IsNullOrEmpty(ev.Data))
+                        return;
+
+                    AppendText(GetTextBox(tab), ev.Data, SelectColorFromText(ev.Data));
+                }
+                else if (e is ProcessExit)
+                {
+                    StopTab(tab);
+                }
+            }, this );
 
             RefreshButtonStatus(pipe);
 
@@ -187,41 +196,7 @@ namespace ServiceMonitor
         #endregion
 
         #region Text Management
-
-
-        private delegate void ShowMessageHandler(ProcessStatus status, string msg, object arg);
-        void ShowMessage(ProcessStatus status, string msg, object arg)
-        {
-
-
-            if (this.InvokeRequired)
-            {
-                this.BeginInvoke(new ShowMessageHandler(ShowMessage), new object[] { status, msg, arg });
-            }
-            else
-            {
-                switch( status )
-                {
-                    case ProcessStatus.LogData:
-                        {
-                            if (string.IsNullOrEmpty(msg))
-                                return;
-
-
-
-                            AppendText(GetTextBox(arg as TabPage), msg, SelectColorFromText(msg));
-                        }
-                        break;
-                    case ProcessStatus.Exit:
-                        {
-                            var tab = arg as TabPage;
-                            StopTab(tab);                            
-                        }
-                        break;
-                }
-                
-            }
-        }
+        
 
         struct ColorDef
         {
@@ -408,7 +383,12 @@ namespace ServiceMonitor
         }
 
         private void btnStop_Click(object sender, EventArgs e)
-        {            
+        {
+            StopCurrTab();
+        }
+
+        void StopCurrTab()
+        {
             var pipe = GetPipe(tabMain.SelectedTab);
             if (pipe == null)
                 return;
@@ -713,6 +693,64 @@ namespace ServiceMonitor
 
 
         #endregion
-       
+
+        private void BuildToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StopCurrTab();
+
+            RunTableShell(tabMain.SelectedTab);
+        }
+
+        // 命名规则: 与svc同目录下,  svc.exe 对应的批处理是 svc_Build.bat
+        void RunTableShell(TabPage page, Action doneCallback = null)
+        {
+            var svc = page.Tag as ProcessPipe;
+            var buildcmd = Path.Combine(Path.GetDirectoryName(svc.FileName), Path.GetFileNameWithoutExtension(svc.FileName) + "_Build") + ".bat";
+
+            var pipe = new ProcessPipe(buildcmd, "", (ProcessEvent e ) =>
+            {
+                if (e is ProcessLogData)
+                {
+                    var ev = e as ProcessLogData;
+
+                    if (string.IsNullOrEmpty(ev.Data))
+                        return;
+
+                    AppendText(GetTextBox(page), ev.Data, SelectColorFromText(ev.Data));
+                }
+                else if (e is ProcessStart)
+                {
+                    var ev = e as ProcessStart;
+                    AppendText(GetTextBox(page), "启动Shell: " + ev.FileName, Color.Yellow);
+                }
+                else if (e is ProcessExit)
+                {
+                    AppendText(GetTextBox(page), "结束Shell", Color.Yellow);
+
+                    if (doneCallback != null)
+                    {
+                        doneCallback();
+                    }
+                }
+            }, this );
+
+
+            pipe.Start();
+        }
+
+        private void BuildRunFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            StopCurrTab();
+
+            RunTableShell(tabMain.SelectedTab, () =>{
+                StartTab(tabMain.SelectedTab);
+            });
+
+            
+
+        }
+
+
     }
 }

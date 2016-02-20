@@ -1,29 +1,64 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ServiceMonitor
 {
-    enum ProcessStatus
+
+    public class ProcessEvent
     {
-        LogData,
-        Exit,
+
     }
+
+
+    public class ProcessStart : ProcessEvent
+    {
+        public string FileName;
+
+        public ProcessStart(string filename)
+        {
+            FileName = filename;
+        }
+    }
+
+    public class ProcessLogData : ProcessEvent
+    {
+        public string Data;
+
+        public ProcessLogData( string data )
+        {
+            Data = data;
+        }
+    }
+
+    public class ProcessExit : ProcessEvent
+    {
+
+    }
+
+    public class ProcessError : ProcessEvent
+    {
+        public string Data;
+
+        public ProcessError(string data)
+        {
+            Data = data;
+        }
+    }
+
+
 
     class ProcessPipe
     {
         Process _process;
-
+        Control _invoker;
         string _filename;
         string _arg;
         bool _running;
-        Action<ProcessStatus, string> _callback;
+        Action<ProcessEvent> _callback;
 
         public string FileName
         {
@@ -43,12 +78,13 @@ namespace ServiceMonitor
         }
 
 
-        public ProcessPipe(string filename, string arg, Action<ProcessStatus, string> callback)
+        public ProcessPipe(string filename, string arg, Action<ProcessEvent> callback, Control invoker)
         {
             _filename = filename;
             _arg = arg;
             _callback = callback;
-            AutoScroll = true;
+            _invoker = invoker;
+            AutoScroll = true;            
         }
 
         public bool Running
@@ -75,37 +111,63 @@ namespace ServiceMonitor
             info.CreateNoWindow = true;
             info.WorkingDirectory = Path.GetDirectoryName(_filename);
 
-
             ThreadPool.QueueUserWorkItem(delegate(object state) {
 
-                var p = Process.Start(info);
-                _process = p;
+                SafeCall(new ProcessStart(_filename));
 
-                p.OutputDataReceived += delegate(object sender, DataReceivedEventArgs e)
+                Process p = null;
+                try
                 {
-                    _callback(ProcessStatus.LogData, e.Data);
-                };
-
-                p.ErrorDataReceived += delegate(object sender, DataReceivedEventArgs e)
+                    p = Process.Start(info);
+                    _process = p;
+                }
+                catch (Exception e)
                 {
-                    _callback(ProcessStatus.LogData, e.Data);
-                };
+                    SafeCall(new ProcessError(e.ToString()));
+                }
 
-                p.BeginOutputReadLine();
-                p.BeginErrorReadLine();
+                if (p != null )
+                {
+                    p.OutputDataReceived += delegate(object sender, DataReceivedEventArgs e)
+                    {
+                        SafeCall(new ProcessLogData(e.Data));
+                    };
 
-                Application.DoEvents();
-                p.WaitForExit();
+                    p.ErrorDataReceived += delegate(object sender, DataReceivedEventArgs e)
+                    {
+                        SafeCall(new ProcessLogData(e.Data));
+                    };
 
-                p.Close();
+                    p.BeginOutputReadLine();
+                    p.BeginErrorReadLine();
 
-                _callback(ProcessStatus.Exit, null);
+                    Application.DoEvents();
+                    p.WaitForExit();
+
+                    p.Close();
+                }
+
+
+                SafeCall(new ProcessExit());
 
                 _process = null;
                 _running = false;
             
             
             });
+        }
+
+        delegate void InvokeHandler(ProcessEvent ev);
+        void SafeCall(ProcessEvent ev)
+        {
+            if (_invoker != null && _invoker.InvokeRequired)
+            {
+                _invoker.BeginInvoke(new InvokeHandler( SafeCall ), ev );
+            }
+            else
+            {
+                _callback(ev);
+            }
         }
 
         public void Stop( )
@@ -122,13 +184,11 @@ namespace ServiceMonitor
             {
                 _process.Kill();
             }
-            catch( Exception )
+            catch
             {
 
             }
 
-            
-            
         }
 
     }
