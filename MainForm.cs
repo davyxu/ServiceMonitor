@@ -70,6 +70,11 @@ namespace ServiceMonitor
 
         void SaveSettings(string filename)
         {
+            if (_profile == null )
+            {
+                _profile = new Profile();
+            }
+
             _profile.Tabs.Clear();
             foreach (TabPage tab in tabMain.TabPages)
             {
