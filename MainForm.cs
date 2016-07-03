@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Text;
@@ -160,7 +161,8 @@ namespace ServiceMonitor
 
             var tab = new TabPage(name);
 
-            tab.ContextMenuStrip = mnuTab;            
+            tab.ContextMenuStrip = mnuTab;
+
 
             var text = new ListBox();
             text.Dock = DockStyle.Fill;
@@ -498,6 +500,21 @@ namespace ServiceMonitor
 
         #region Tab Menu And Data
 
+        private void OpenDirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var tab = tabMain.SelectedTab;
+            if (tab == null)
+                return;
+
+            var pipe = GetPipe(tab);
+            if (pipe != null)
+            {
+                Process.Start("explorer.exe", Path.GetDirectoryName(pipe.FileName));
+            }
+        }
+
+
+
         private void mnuCopyTab_Click(object sender, EventArgs e)
         {
             var tab = tabMain.SelectedTab;
@@ -756,6 +773,7 @@ namespace ServiceMonitor
 
         }
 
+ 
 
     }
 }

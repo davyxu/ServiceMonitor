@@ -55,6 +55,7 @@
             this.btnStopAll = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.OpenDirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuTab.SuspendLayout();
             this.panelOp.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -88,9 +89,10 @@
             this.mnuCloseTab,
             this.ClearToolStripMenuItem,
             this.ClearAllToolStripMenuItem,
-            this.AutoScrollToolStripMenuItem});
+            this.AutoScrollToolStripMenuItem,
+            this.OpenDirToolStripMenuItem});
             this.mnuTab.Name = "contextMenuStrip1";
-            this.mnuTab.Size = new System.Drawing.Size(160, 270);
+            this.mnuTab.Size = new System.Drawing.Size(160, 292);
             this.mnuTab.Opening += new System.ComponentModel.CancelEventHandler(this.mnuTab_Opening);
             // 
             // CopyLineTextToolStripMenuItem
@@ -280,6 +282,13 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(862, 558);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
+            // OpenDirToolStripMenuItem
+            // 
+            this.OpenDirToolStripMenuItem.Name = "OpenDirToolStripMenuItem";
+            this.OpenDirToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.OpenDirToolStripMenuItem.Text = "打开目录";
+            this.OpenDirToolStripMenuItem.Click += new System.EventHandler(this.OpenDirToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -290,7 +299,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
-            this.Text = "ServiceMonitor 1.7";
+            this.Text = "ServiceMonitor 1.7.1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainForm_DragDrop);
@@ -330,6 +339,7 @@
         private System.Windows.Forms.ToolStripMenuItem BuildToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem BuildRunFToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem OpenDirToolStripMenuItem;
     }
 }
 
