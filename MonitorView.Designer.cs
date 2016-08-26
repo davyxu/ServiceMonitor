@@ -1,6 +1,6 @@
 ﻿namespace ServiceMonitor
 {
-    partial class MainForm
+    partial class MonitorView
     {
         /// <summary>
         /// Required designer variable.
@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MonitorView));
             this.tabMain = new System.Windows.Forms.TabControl();
-            this.mnuTab = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.logMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CopyLineTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LogSaveToFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
@@ -40,10 +40,6 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.SearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuAddTab = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuCopyTab = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuCloseTab = new System.Windows.Forms.ToolStripMenuItem();
             this.ClearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ClearAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AutoScrollToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,15 +51,21 @@
             this.btnStopAll = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tabMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CloseTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenDirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuTab.SuspendLayout();
+            this.CopyTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
+            this.AddTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logMenu.SuspendLayout();
             this.panelOp.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.tabMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabMain
             // 
-            this.tabMain.ContextMenuStrip = this.mnuTab;
             this.tabMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabMain.Location = new System.Drawing.Point(3, 3);
             this.tabMain.Name = "tabMain";
@@ -72,9 +74,9 @@
             this.tabMain.TabIndex = 0;
             this.tabMain.SelectedIndexChanged += new System.EventHandler(this.tabMain_SelectedIndexChanged);
             // 
-            // mnuTab
+            // logMenu
             // 
-            this.mnuTab.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.logMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CopyLineTextToolStripMenuItem,
             this.LogSaveToFileToolStripMenuItem,
             this.toolStripMenuItem4,
@@ -83,17 +85,12 @@
             this.toolStripMenuItem2,
             this.SearchToolStripMenuItem,
             this.toolStripMenuItem3,
-            this.mnuAddTab,
-            this.mnuCopyTab,
-            this.toolStripMenuItem1,
-            this.mnuCloseTab,
             this.ClearToolStripMenuItem,
             this.ClearAllToolStripMenuItem,
-            this.AutoScrollToolStripMenuItem,
-            this.OpenDirToolStripMenuItem});
-            this.mnuTab.Name = "contextMenuStrip1";
-            this.mnuTab.Size = new System.Drawing.Size(160, 292);
-            this.mnuTab.Opening += new System.ComponentModel.CancelEventHandler(this.mnuTab_Opening);
+            this.AutoScrollToolStripMenuItem});
+            this.logMenu.Name = "contextMenuStrip1";
+            this.logMenu.Size = new System.Drawing.Size(160, 198);
+            this.logMenu.Opening += new System.ComponentModel.CancelEventHandler(this.mnuTab_Opening);
             // 
             // CopyLineTextToolStripMenuItem
             // 
@@ -146,32 +143,6 @@
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(156, 6);
-            // 
-            // mnuAddTab
-            // 
-            this.mnuAddTab.Name = "mnuAddTab";
-            this.mnuAddTab.Size = new System.Drawing.Size(159, 22);
-            this.mnuAddTab.Text = "添加Tab(&A)";
-            this.mnuAddTab.Click += new System.EventHandler(this.mnuAddTab_Click);
-            // 
-            // mnuCopyTab
-            // 
-            this.mnuCopyTab.Name = "mnuCopyTab";
-            this.mnuCopyTab.Size = new System.Drawing.Size(159, 22);
-            this.mnuCopyTab.Text = "复制Tab(&C)";
-            this.mnuCopyTab.Click += new System.EventHandler(this.mnuCopyTab_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(156, 6);
-            // 
-            // mnuCloseTab
-            // 
-            this.mnuCloseTab.Name = "mnuCloseTab";
-            this.mnuCloseTab.Size = new System.Drawing.Size(159, 22);
-            this.mnuCloseTab.Text = "关闭Tab(&X)";
-            this.mnuCloseTab.Click += new System.EventHandler(this.mnuCloseTab_Click);
             // 
             // ClearToolStripMenuItem
             // 
@@ -282,14 +253,57 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(862, 558);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
+            // tabMenu
+            // 
+            this.tabMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CloseTabToolStripMenuItem,
+            this.AddTabToolStripMenuItem,
+            this.toolStripMenuItem5,
+            this.CopyTabToolStripMenuItem,
+            this.toolStripMenuItem6,
+            this.OpenDirToolStripMenuItem});
+            this.tabMenu.Name = "tabMenu";
+            this.tabMenu.Size = new System.Drawing.Size(166, 126);
+            // 
+            // CloseTabToolStripMenuItem
+            // 
+            this.CloseTabToolStripMenuItem.Name = "CloseTabToolStripMenuItem";
+            this.CloseTabToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.CloseTabToolStripMenuItem.Text = "关闭(&X)";
+            this.CloseTabToolStripMenuItem.Click += new System.EventHandler(this.CloseTabToolStripMenuItem_Click);
+            // 
             // OpenDirToolStripMenuItem
             // 
             this.OpenDirToolStripMenuItem.Name = "OpenDirToolStripMenuItem";
-            this.OpenDirToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.OpenDirToolStripMenuItem.Text = "打开目录";
-            this.OpenDirToolStripMenuItem.Click += new System.EventHandler(this.OpenDirToolStripMenuItem_Click);
+            this.OpenDirToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.OpenDirToolStripMenuItem.Text = "打开目标目录(&D)";
+            this.OpenDirToolStripMenuItem.Click += new System.EventHandler(this.OpenDirToolStripMenuItem_Click_1);
             // 
-            // MainForm
+            // CopyTabToolStripMenuItem
+            // 
+            this.CopyTabToolStripMenuItem.Name = "CopyTabToolStripMenuItem";
+            this.CopyTabToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.CopyTabToolStripMenuItem.Text = "复制(&C)";
+            this.CopyTabToolStripMenuItem.Click += new System.EventHandler(this.CopyTabToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(162, 6);
+            // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(162, 6);
+            // 
+            // AddTabToolStripMenuItem
+            // 
+            this.AddTabToolStripMenuItem.Name = "AddTabToolStripMenuItem";
+            this.AddTabToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.AddTabToolStripMenuItem.Text = "添加(&A)";
+            this.AddTabToolStripMenuItem.Click += new System.EventHandler(this.AddTabToolStripMenuItem_Click);
+            // 
+            // MonitorView
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -298,16 +312,17 @@
             this.ClientSize = new System.Drawing.Size(862, 558);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "MainForm";
-            this.Text = "ServiceMonitor 1.7.1";
+            this.Name = "MonitorView";
+            this.Text = "ServiceMonitor 2.0.0";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainForm_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainForm_DragEnter);
-            this.mnuTab.ResumeLayout(false);
+            this.logMenu.ResumeLayout(false);
             this.panelOp.ResumeLayout(false);
             this.panelOp.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tabMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -321,11 +336,7 @@
         private System.Windows.Forms.Button btnStopAll;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.ContextMenuStrip mnuTab;
-        private System.Windows.Forms.ToolStripMenuItem mnuCopyTab;
-        private System.Windows.Forms.ToolStripMenuItem mnuCloseTab;
-        private System.Windows.Forms.ToolStripMenuItem mnuAddTab;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ContextMenuStrip logMenu;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtArgs;
         private System.Windows.Forms.ToolStripMenuItem ClearToolStripMenuItem;
@@ -339,7 +350,13 @@
         private System.Windows.Forms.ToolStripMenuItem BuildToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem BuildRunFToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
+        private System.Windows.Forms.ContextMenuStrip tabMenu;
+        private System.Windows.Forms.ToolStripMenuItem CloseTabToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem CopyTabToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
         private System.Windows.Forms.ToolStripMenuItem OpenDirToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AddTabToolStripMenuItem;
     }
 }
 
