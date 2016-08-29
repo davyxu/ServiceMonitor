@@ -336,8 +336,11 @@ namespace ServiceMonitor
                 return;
 
             _search = new SearchDialog( SafeGetCurrTableModel() );
-
-            _search.Show();
+            _search.FormClosed += (s, ee) =>
+            {
+                _search = null;
+            };
+            _search.Show(this);
         }
 
         // 编译并运行
