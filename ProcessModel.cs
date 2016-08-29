@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -10,15 +8,22 @@ using System.Windows.Forms;
 
 namespace ServiceMonitor
 {
-    class LogData
+    public class LogData
     {
         string _text;
         Color _color;
+        int _index;
 
-        public LogData(Color c, string text )
+        public LogData(Color c, string text, int index )
         {
             _color = c;
             _text = text;
+            _index = index;
+        }
+
+        public int Index
+        {
+            get { return _index; }
         }
 
         public string Text
@@ -30,12 +35,19 @@ namespace ServiceMonitor
             get { return _color; }
         }
 
+        public override string ToString()
+        {
+            return _text;
+        }
+
     }
 
-    class ProcessModel
+    public class ProcessModel
     {
         Process _process;
-        public Control invoker;        
+        public Control invoker;
+
+        public LogView view;
                 
         public Action<ProcessModel> OnStart;
 
@@ -46,6 +58,7 @@ namespace ServiceMonitor
         public Action OnClear;
 
         public Func<int, LogData> OnGetData;
+        public Func<int> OnGetDataCount;
 
         public Func<string> OnGetAllLog;
 
@@ -95,6 +108,11 @@ namespace ServiceMonitor
         public LogData GetData( int index )
         {
             return OnGetData( index);
+        }
+
+        public int GetDataCount( )
+        {
+            return OnGetDataCount();
         }
 
         public string GetAllLog( )

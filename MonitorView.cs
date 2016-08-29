@@ -123,7 +123,7 @@ namespace ServiceMonitor
 
             model.OnLog += logProc;
             model.OnError += logProc;
-            
+            model.view = logview;
 
             model.OnClear += delegate()
             {
@@ -133,6 +133,12 @@ namespace ServiceMonitor
             model.OnGetData += ( index ) =>
             {
                 return logview.Items[index] as LogData;
+            };
+
+
+            model.OnGetDataCount += ( ) =>
+            {
+                return logview.Items.Count;
             };
 
             model.OnGetAllLog += delegate()
@@ -317,25 +323,21 @@ namespace ServiceMonitor
             if (!string.IsNullOrEmpty(model.FileName))
             {
                 AutoScrollToolStripMenuItem.Checked = model.AutoScroll;
+                SearchToolStripMenuItem.Enabled = _search == null;
             }
            
         }
 
-        string _lastSearch;
+        SearchDialog _search;
+
         private void SearchToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var dialog = new SearchDialog(_lastSearch);
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                _lastSearch = dialog.Content;
+            if (_search != null)
+                return;
 
-                // DismarkSearchLine();
+            _search = new SearchDialog( SafeGetCurrTableModel() );
 
-                if (!string.IsNullOrEmpty(dialog.Content))
-                {
-                    //   MarkSearchLine(dialog.Content);
-                }
-            }
+            _search.Show();
         }
 
         // 编译并运行

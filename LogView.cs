@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace ServiceMonitor
 {
-    class LogView : ListBox
+    public class LogView : ListBox
     {        
         public LogView( )
         {
@@ -19,7 +19,7 @@ namespace ServiceMonitor
 
         public void AddLog( Color c, string text, bool autoscroll )
         {
-            int index = this.Items.Add(new LogData(c, text));
+            int index = this.Items.Add(new LogData(c, text, this.Items.Count));
 
             if ( autoscroll )
             {
@@ -97,6 +97,12 @@ namespace ServiceMonitor
             {
 
             }
+        }
+
+        public void EnsureVisible( int index )
+        {            
+            this.TopIndex = index;
+            this.Refresh();
         }
     }
 }
