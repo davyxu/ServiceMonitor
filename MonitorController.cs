@@ -22,7 +22,7 @@ namespace ServiceMonitor
         {
             TabSettings.LoadSettings(TabFileName, (tab) =>
             {
-                CreateProcess(tab.FileName, tab.Args);
+                AddProcess(tab.FileName, tab.Args);
             });
 
 
@@ -89,7 +89,7 @@ namespace ServiceMonitor
             }
         }
 
-        public void CreateProcess(string filename, string arg )
+        public void AddProcess(string filename, string arg )
         {
             var model = new ProcessModel( );
             model.FileName = filename;
@@ -99,6 +99,11 @@ namespace ServiceMonitor
             var obj = OnProcessCreate( model );
 
             _modelByID.Add(obj, model);
+        }
+
+        public void RemoveProcess( object obj )
+        {
+            _modelByID.Remove(obj);
         }
 
 

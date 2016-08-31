@@ -203,7 +203,7 @@ namespace ServiceMonitor
                     p.BeginErrorReadLine();
 
                     Application.DoEvents();
-                    p.WaitForExit();
+                    p.WaitForExit();                    
 
                     p.Close();
                 }
@@ -213,6 +213,7 @@ namespace ServiceMonitor
                 {
                     if (OnExit != null)
                     {
+                        Debug.WriteLine("exit " + p.ExitCode.ToString());
                         OnExit(this);
                     }
                 });

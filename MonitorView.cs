@@ -198,7 +198,7 @@ namespace ServiceMonitor
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
             foreach (string file in files)
             {
-                _controller.CreateProcess(file, "");                
+                _controller.AddProcess(file, "");                
             }
         }
         private void MainForm_DragEnter(object sender, DragEventArgs e)
@@ -368,18 +368,19 @@ namespace ServiceMonitor
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                _controller.CreateProcess(dialog.FileName, "");
+                _controller.AddProcess(dialog.FileName, "");
             }
         }
 
         private void CloseTabToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SafeGetCurrTableModel().Stop();
-
             var tab = tabMain.SelectedTab;
             if (tab != null)
             {
+                SafeGetCurrTableModel().Stop();
+
                 tabMain.TabPages.Remove(tab);
+                _controller.RemoveProcess(tab);
             }
         }
 
@@ -388,7 +389,7 @@ namespace ServiceMonitor
             var model = SafeGetCurrTableModel();
             if (!string.IsNullOrEmpty(model.FileName))
             {
-                _controller.CreateProcess(model.FileName, model.Args);
+                _controller.AddProcess(model.FileName, model.Args);
             }
         }
 
