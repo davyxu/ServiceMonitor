@@ -51,7 +51,10 @@ namespace ServiceMonitor
         Dictionary<object, ProcessModel> _modelByID = new Dictionary<object, ProcessModel>();
 
         public ProcessModel GetModelByObject(object obj)
-        {            
+        {
+            if (obj == null)
+                return null;
+
             ProcessModel model;
             if ( _modelByID.TryGetValue( obj, out model ) )
             {
