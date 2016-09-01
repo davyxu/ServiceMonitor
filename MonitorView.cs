@@ -68,7 +68,7 @@ namespace ServiceMonitor
 
                 RefreshButtonStatus(shellModel);
 
-                if (startAfterDone)
+                if (startAfterDone && shellModel.ExitCode == 0)
                 {
                     svcModel.Start();
                 }
@@ -170,16 +170,14 @@ namespace ServiceMonitor
 
         void OnProcessStop(ProcessModel model)
         {
-            RefreshButtonStatus(model);
-
-            model.WriteLog(Color.Yellow, "进程停止");            
+            RefreshButtonStatus(model); 
         }
 
         void OnProcessExit(ProcessModel model)
         {
             RefreshButtonStatus(model);
 
-            model.WriteLog(Color.Yellow, "进程结束");
+            model.WriteLog(Color.Yellow, string.Format("进程结束({0})", model.ExitCode) );
         }
 
 
