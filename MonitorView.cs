@@ -196,7 +196,8 @@ namespace ServiceMonitor
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
             foreach (string file in files)
             {
-                _controller.AddProcess(file, "");                
+
+                _controller.AddProcess(new TabInfo { FileName = file });
             }
         }
         private void MainForm_DragEnter(object sender, DragEventArgs e)
@@ -315,12 +316,22 @@ namespace ServiceMonitor
             SafeGetCurrTableModel( ).AutoScroll = item.Checked;
         }
 
+        private void ManualStartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var item = sender as ToolStripMenuItem;
+            item.Checked = !item.Checked;
+
+            SafeGetCurrTableModel().ManualControl = item.Checked;
+        }
+
+
         private void mnuTab_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             var model = SafeGetCurrTableModel();
             if (!string.IsNullOrEmpty(model.FileName))
             {
                 AutoScrollToolStripMenuItem.Checked = model.AutoScroll;
+                ManualStartToolStripMenuItem.Checked = model.ManualControl;
                 SearchToolStripMenuItem.Enabled = _search == null;
             }
            
@@ -366,7 +377,7 @@ namespace ServiceMonitor
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                _controller.AddProcess(dialog.FileName, "");
+                _controller.AddProcess(new TabInfo { FileName = dialog.FileName });
             }
         }
 
@@ -387,7 +398,8 @@ namespace ServiceMonitor
             var model = SafeGetCurrTableModel();
             if (!string.IsNullOrEmpty(model.FileName))
             {
-                _controller.AddProcess(model.FileName, model.Args);
+                var tabinfo = new TabInfo { FileName = model.FileName, Args = model.Args, ManualControl = model.ManualControl };
+                _controller.AddProcess(tabinfo);
             }
         }
 
@@ -400,6 +412,7 @@ namespace ServiceMonitor
             }
         }
         #endregion
+
 
 
 

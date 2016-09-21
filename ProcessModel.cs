@@ -89,6 +89,8 @@ namespace ServiceMonitor
 
         public bool AutoScroll  { get; set; }
 
+        public bool ManualControl { get; set; }
+
         // 可停止的, shell不能停止, 因为可能是里面的另外进程在允许
         public bool CanStop { get; set; }
 

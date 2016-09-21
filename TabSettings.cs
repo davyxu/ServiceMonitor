@@ -10,6 +10,21 @@ namespace ServiceMonitor
     {
         public string FileName;
         public string Args;
+        public bool ManualControl;
+
+        public void OnLoad( ProcessModel model )
+        {
+            model.FileName = this.FileName;
+            model.Args = this.Args;
+            model.ManualControl = this.ManualControl;
+        }
+
+        public void OnSave( ProcessModel model )
+        {
+            this.FileName = model.FileName;
+            this.Args = model.Args;
+            this.ManualControl = model.ManualControl;
+        }
     }
 
     class Profile

@@ -43,6 +43,7 @@
             this.ClearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ClearAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AutoScrollToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ManualStartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelOp = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.txtArgs = new System.Windows.Forms.TextBox();
@@ -53,11 +54,11 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tabMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CloseTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.OpenDirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CopyTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
             this.AddTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
+            this.CopyTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
+            this.OpenDirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logMenu.SuspendLayout();
             this.panelOp.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -87,9 +88,10 @@
             this.toolStripMenuItem3,
             this.ClearToolStripMenuItem,
             this.ClearAllToolStripMenuItem,
-            this.AutoScrollToolStripMenuItem});
+            this.AutoScrollToolStripMenuItem,
+            this.ManualStartToolStripMenuItem});
             this.logMenu.Name = "contextMenuStrip1";
-            this.logMenu.Size = new System.Drawing.Size(160, 198);
+            this.logMenu.Size = new System.Drawing.Size(160, 220);
             this.logMenu.Opening += new System.ComponentModel.CancelEventHandler(this.mnuTab_Opening);
             // 
             // CopyLineTextToolStripMenuItem
@@ -164,6 +166,13 @@
             this.AutoScrollToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.AutoScrollToolStripMenuItem.Text = "自动卷轴";
             this.AutoScrollToolStripMenuItem.Click += new System.EventHandler(this.AutoScrollToolStripMenuItem_Click);
+            // 
+            // ManualStartToolStripMenuItem
+            // 
+            this.ManualStartToolStripMenuItem.Name = "ManualStartToolStripMenuItem";
+            this.ManualStartToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.ManualStartToolStripMenuItem.Text = "手动启动";
+            this.ManualStartToolStripMenuItem.Click += new System.EventHandler(this.ManualStartToolStripMenuItem_Click);
             // 
             // panelOp
             // 
@@ -263,7 +272,7 @@
             this.toolStripMenuItem6,
             this.OpenDirToolStripMenuItem});
             this.tabMenu.Name = "tabMenu";
-            this.tabMenu.Size = new System.Drawing.Size(166, 126);
+            this.tabMenu.Size = new System.Drawing.Size(166, 104);
             // 
             // CloseTabToolStripMenuItem
             // 
@@ -272,12 +281,17 @@
             this.CloseTabToolStripMenuItem.Text = "关闭(&X)";
             this.CloseTabToolStripMenuItem.Click += new System.EventHandler(this.CloseTabToolStripMenuItem_Click);
             // 
-            // OpenDirToolStripMenuItem
+            // AddTabToolStripMenuItem
             // 
-            this.OpenDirToolStripMenuItem.Name = "OpenDirToolStripMenuItem";
-            this.OpenDirToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
-            this.OpenDirToolStripMenuItem.Text = "打开目标目录(&D)";
-            this.OpenDirToolStripMenuItem.Click += new System.EventHandler(this.OpenDirToolStripMenuItem_Click_1);
+            this.AddTabToolStripMenuItem.Name = "AddTabToolStripMenuItem";
+            this.AddTabToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.AddTabToolStripMenuItem.Text = "添加(&A)";
+            this.AddTabToolStripMenuItem.Click += new System.EventHandler(this.AddTabToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(162, 6);
             // 
             // CopyTabToolStripMenuItem
             // 
@@ -286,22 +300,17 @@
             this.CopyTabToolStripMenuItem.Text = "复制(&C)";
             this.CopyTabToolStripMenuItem.Click += new System.EventHandler(this.CopyTabToolStripMenuItem_Click);
             // 
-            // toolStripMenuItem5
-            // 
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(162, 6);
-            // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
             this.toolStripMenuItem6.Size = new System.Drawing.Size(162, 6);
             // 
-            // AddTabToolStripMenuItem
+            // OpenDirToolStripMenuItem
             // 
-            this.AddTabToolStripMenuItem.Name = "AddTabToolStripMenuItem";
-            this.AddTabToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
-            this.AddTabToolStripMenuItem.Text = "添加(&A)";
-            this.AddTabToolStripMenuItem.Click += new System.EventHandler(this.AddTabToolStripMenuItem_Click);
+            this.OpenDirToolStripMenuItem.Name = "OpenDirToolStripMenuItem";
+            this.OpenDirToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.OpenDirToolStripMenuItem.Text = "打开目标目录(&D)";
+            this.OpenDirToolStripMenuItem.Click += new System.EventHandler(this.OpenDirToolStripMenuItem_Click_1);
             // 
             // MonitorView
             // 
@@ -313,7 +322,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MonitorView";
-            this.Text = "ServiceMonitor 2.0.0";
+            this.Text = "ServiceMonitor 2.1.0";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainForm_DragDrop);
@@ -357,6 +366,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
         private System.Windows.Forms.ToolStripMenuItem OpenDirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AddTabToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ManualStartToolStripMenuItem;
     }
 }
 

@@ -22,7 +22,7 @@ namespace ServiceMonitor
         {
             TabSettings.LoadSettings(TabFileName, (tab) =>
             {
-                AddProcess(tab.FileName, tab.Args);
+                AddProcess(tab );
             });
 
 
@@ -38,8 +38,7 @@ namespace ServiceMonitor
             foreach (ProcessModel model in _modelByID.Values)
             {
                 var tabInfo = new TabInfo();
-                tabInfo.FileName = model.FileName;
-                tabInfo.Args = model.Args;
+                tabInfo.OnSave(model);
                 list.Add(tabInfo);
             }
 
@@ -69,6 +68,9 @@ namespace ServiceMonitor
         {
             foreach( ProcessModel model in _modelByID.Values )
             {
+                if (model.ManualControl)
+                    continue;
+
                 model.Start();
             }
         }
@@ -77,6 +79,9 @@ namespace ServiceMonitor
         {
             foreach (ProcessModel model in _modelByID.Values)
             {
+                if (model.ManualControl)
+                    continue;
+
                 model.ClearLog();
             }
         }
@@ -85,16 +90,19 @@ namespace ServiceMonitor
         {
             foreach (ProcessModel model in _modelByID.Values)
             {
+                if (model.ManualControl)
+                    continue;
+
                 model.Stop();
             }
         }
 
-        public void AddProcess(string filename, string arg )
+        public void AddProcess(TabInfo tab)
         {
             var model = new ProcessModel( );
-            model.FileName = filename;
-            model.Args = arg;
             model.invoker = _invoker;
+
+            tab.OnLoad(model);
 
             var obj = OnProcessCreate( model );
 
