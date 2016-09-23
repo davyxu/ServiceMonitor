@@ -84,6 +84,12 @@
     <Compile Include="SearchDialog.Designer.cs">
       <DependentUpon>SearchDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="WorkDirDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorkDirDialog.Designer.cs">
+      <DependentUpon>WorkDirDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="TextDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +110,9 @@
     </Compile>
     <EmbeddedResource Include="SearchDialog.resx">
       <DependentUpon>SearchDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorkDirDialog.resx">
+      <DependentUpon>WorkDirDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TextDialog.resx">
       <DependentUpon>TextDialog.cs</DependentUpon>

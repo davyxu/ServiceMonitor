@@ -231,7 +231,7 @@ namespace ServiceMonitor
 
         private void btnStopAll_Click(object sender, EventArgs e)
         {
-            _controller.StopAllProcess();
+            _controller.StopAllProcess(false);
         }
 
         private void tabMain_SelectedIndexChanged(object sender, EventArgs e)
@@ -239,6 +239,16 @@ namespace ServiceMonitor
             RefreshButtonStatus(SafeGetCurrTableModel());
         }
 
+        private void btnSetWorkDir_Click(object sender, EventArgs e)
+        {
+            var model = SafeGetCurrTableModel();
+
+            var dialog = new WorkDirDialog(model.WorkDir);
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                model.WorkDir = dialog.WorkDir;
+            }
+        }
 
         bool _disableTextNotify;
         void RefreshButtonStatus(ProcessModel pm)
@@ -412,6 +422,8 @@ namespace ServiceMonitor
             }
         }
         #endregion
+
+
 
 
 

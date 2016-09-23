@@ -47,6 +47,7 @@
             this.panelOp = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.txtArgs = new System.Windows.Forms.TextBox();
+            this.btnWorkDir = new System.Windows.Forms.Button();
             this.btnStartAll = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnStopAll = new System.Windows.Forms.Button();
@@ -179,6 +180,7 @@
             this.panelOp.AutoScroll = true;
             this.panelOp.Controls.Add(this.label1);
             this.panelOp.Controls.Add(this.txtArgs);
+            this.panelOp.Controls.Add(this.btnWorkDir);
             this.panelOp.Controls.Add(this.btnStartAll);
             this.panelOp.Controls.Add(this.btnStart);
             this.panelOp.Controls.Add(this.btnStopAll);
@@ -205,6 +207,16 @@
             this.txtArgs.Size = new System.Drawing.Size(231, 21);
             this.txtArgs.TabIndex = 1;
             this.txtArgs.TextChanged += new System.EventHandler(this.txtArgs_TextChanged);
+            // 
+            // btnWorkDir
+            // 
+            this.btnWorkDir.Location = new System.Drawing.Point(465, 3);
+            this.btnWorkDir.Name = "btnWorkDir";
+            this.btnWorkDir.Size = new System.Drawing.Size(75, 23);
+            this.btnWorkDir.TabIndex = 0;
+            this.btnWorkDir.Text = "工作目录";
+            this.btnWorkDir.UseVisualStyleBackColor = true;
+            this.btnWorkDir.Click += new System.EventHandler(this.btnSetWorkDir_Click);
             // 
             // btnStartAll
             // 
@@ -322,7 +334,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MonitorView";
-            this.Text = "ServiceMonitor 2.1.0";
+            this.Text = "ServiceMonitor 2.2.0";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainForm_DragDrop);
@@ -367,6 +379,7 @@
         private System.Windows.Forms.ToolStripMenuItem OpenDirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AddTabToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ManualStartToolStripMenuItem;
+        private System.Windows.Forms.Button btnWorkDir;
     }
 }
 

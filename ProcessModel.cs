@@ -85,7 +85,9 @@ namespace ServiceMonitor
 
         public string FileName{get;set;}
 
-        public string Args{get;set;}        
+        public string Args{get;set;}
+
+        public string WorkDir { get; set; }
 
         public bool AutoScroll  { get; set; }
 
@@ -146,7 +148,15 @@ namespace ServiceMonitor
             info.StandardOutputEncoding = Encoding.UTF8;
             info.UseShellExecute = false;
             info.CreateNoWindow = true;
-            info.WorkingDirectory = Path.GetDirectoryName(FileName);
+            if (string.IsNullOrEmpty(WorkDir))
+            {
+                info.WorkingDirectory = Path.GetDirectoryName(FileName);
+            }
+            else
+            {
+                info.WorkingDirectory = WorkDir;
+            }
+            
 
             ThreadPool.QueueUserWorkItem(delegate(object state)
             {

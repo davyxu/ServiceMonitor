@@ -11,12 +11,14 @@ namespace ServiceMonitor
         public string FileName;
         public string Args;
         public bool ManualControl;
+        public string WorkDir;
 
         public void OnLoad( ProcessModel model )
         {
             model.FileName = this.FileName;
             model.Args = this.Args;
             model.ManualControl = this.ManualControl;
+            model.WorkDir = this.WorkDir;
         }
 
         public void OnSave( ProcessModel model )
@@ -24,6 +26,7 @@ namespace ServiceMonitor
             this.FileName = model.FileName;
             this.Args = model.Args;
             this.ManualControl = model.ManualControl;
+            this.WorkDir = model.WorkDir;
         }
     }
 

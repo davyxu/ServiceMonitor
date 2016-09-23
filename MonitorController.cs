@@ -31,7 +31,7 @@ namespace ServiceMonitor
 
         public void Exit( )
         {
-            StopAllProcess();
+            StopAllProcess(true);
 
             var list = new List<TabInfo>();
 
@@ -86,11 +86,11 @@ namespace ServiceMonitor
             }
         }
 
-        public void StopAllProcess()
+        public void StopAllProcess(bool force)
         {
             foreach (ProcessModel model in _modelByID.Values)
             {
-                if (model.ManualControl)
+                if (!force && model.ManualControl)
                     continue;
 
                 model.Stop();

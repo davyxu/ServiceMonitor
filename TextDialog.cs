@@ -12,7 +12,7 @@ namespace ServiceMonitor
 {
     public partial class TextDialog : Form
     {
-        public TextDialog( string txt  )
+        public TextDialog(string txt)
         {
             InitializeComponent();
 
