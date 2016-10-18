@@ -11,7 +11,7 @@ namespace ServiceMonitor
         public string FileName;
         public string Args;
         public bool ManualControl;
-        public string WorkDir;
+        public string WorkDir;        
 
         public void OnLoad( ProcessModel model )
         {

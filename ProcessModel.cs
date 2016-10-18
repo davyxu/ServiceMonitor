@@ -96,7 +96,10 @@ namespace ServiceMonitor
         // 可停止的, shell不能停止, 因为可能是里面的另外进程在允许
         public bool CanStop { get; set; }
 
-        public int ExitCode { get; set; }       
+        public int ExitCode { get; set; }
+
+        // 在tabmain里的顺序
+        public int Index { get; set; }
 
         public ProcessModel( )
         {

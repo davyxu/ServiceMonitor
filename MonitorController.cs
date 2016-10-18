@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace ServiceMonitor
 {
@@ -20,9 +20,10 @@ namespace ServiceMonitor
 
         public void Init( )
         {
+            int index = 0;
             TabSettings.LoadSettings(TabFileName, (tab) =>
-            {
-                AddProcess(tab );
+            {                
+                AddProcess(tab ).Index = index ++ ;
             });
 
 
@@ -35,7 +36,13 @@ namespace ServiceMonitor
 
             var list = new List<TabInfo>();
 
-            foreach (ProcessModel model in _modelByID.Values)
+            var sortedModel = _modelByID.Values.ToList();
+            sortedModel.Sort((a , b) =>
+            {
+                return a.Index < b.Index ? -1 : 1;
+            });
+
+            foreach (ProcessModel model in sortedModel)
             {
                 var tabInfo = new TabInfo();
                 tabInfo.OnSave(model);
@@ -97,16 +104,18 @@ namespace ServiceMonitor
             }
         }
 
-        public void AddProcess(TabInfo tab)
+        public ProcessModel AddProcess(TabInfo tab)
         {
             var model = new ProcessModel( );
-            model.invoker = _invoker;
+            model.invoker = _invoker;            
 
             tab.OnLoad(model);
 
             var obj = OnProcessCreate( model );
 
             _modelByID.Add(obj, model);
+
+            return model;
         }
 
         public void RemoveProcess( object obj )

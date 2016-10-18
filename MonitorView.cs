@@ -101,6 +101,8 @@ namespace ServiceMonitor
             page.Controls.Add(logview);
             tabMain.TabPages.Add(page);
 
+            model.Index = tabMain.TabPages.IndexOf(page);
+
             RefreshButtonStatus(model);
 
             tabMain.SelectedTab = page;
@@ -421,6 +423,52 @@ namespace ServiceMonitor
                 Process.Start("explorer.exe", Path.GetDirectoryName(model.FileName));
             }
         }
+
+
+        private void MoveLeftToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MoveTab(-1);
+        }
+
+        private void MoveRightToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MoveTab(1);
+        }
+
+        void MoveTab(int delta)
+        {
+            var index = tabMain.SelectedIndex;
+
+            if ( index >= tabMain.TabPages.Count - 1 && delta > 0 )
+            {
+                return;
+            }
+
+            if ( index <= 0 && delta < 0 )
+            {
+                return;
+            }
+
+            var tab = tabMain.SelectedTab;
+
+            tabMain.TabPages.RemoveAt(index);
+
+            tabMain.TabPages.Insert(index + delta, tab);
+            tabMain.SelectedIndex = index + delta;
+
+            // 与谁换
+            var slibing = SafeGetModel(tabMain.TabPages[index]);
+            // 更新索引
+            slibing.Index = index;
+
+            // 主动换的人更新索引
+            var model = SafeGetCurrTableModel();
+            model.Index = tabMain.TabPages.IndexOf(tab);
+
+        }
+
+
+
         #endregion
 
 

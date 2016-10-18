@@ -60,6 +60,9 @@
             this.CopyTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
             this.OpenDirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MoveLeftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MoveRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.logMenu.SuspendLayout();
             this.panelOp.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -279,12 +282,15 @@
             this.tabMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CloseTabToolStripMenuItem,
             this.AddTabToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.MoveLeftToolStripMenuItem,
+            this.MoveRightToolStripMenuItem,
             this.toolStripMenuItem5,
             this.CopyTabToolStripMenuItem,
             this.toolStripMenuItem6,
             this.OpenDirToolStripMenuItem});
             this.tabMenu.Name = "tabMenu";
-            this.tabMenu.Size = new System.Drawing.Size(166, 104);
+            this.tabMenu.Size = new System.Drawing.Size(166, 154);
             // 
             // CloseTabToolStripMenuItem
             // 
@@ -324,6 +330,25 @@
             this.OpenDirToolStripMenuItem.Text = "打开目标目录(&D)";
             this.OpenDirToolStripMenuItem.Click += new System.EventHandler(this.OpenDirToolStripMenuItem_Click_1);
             // 
+            // MoveLeftToolStripMenuItem
+            // 
+            this.MoveLeftToolStripMenuItem.Name = "MoveLeftToolStripMenuItem";
+            this.MoveLeftToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.MoveLeftToolStripMenuItem.Text = "左移(&L)";
+            this.MoveLeftToolStripMenuItem.Click += new System.EventHandler(this.MoveLeftToolStripMenuItem_Click);
+            // 
+            // MoveRightToolStripMenuItem
+            // 
+            this.MoveRightToolStripMenuItem.Name = "MoveRightToolStripMenuItem";
+            this.MoveRightToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.MoveRightToolStripMenuItem.Text = "右移(&R)";
+            this.MoveRightToolStripMenuItem.Click += new System.EventHandler(this.MoveRightToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(162, 6);
+            // 
             // MonitorView
             // 
             this.AllowDrop = true;
@@ -334,7 +359,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MonitorView";
-            this.Text = "ServiceMonitor 2.2.0";
+            this.Text = "ServiceMonitor 2.3.0";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainForm_DragDrop);
@@ -380,6 +405,9 @@
         private System.Windows.Forms.ToolStripMenuItem AddTabToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ManualStartToolStripMenuItem;
         private System.Windows.Forms.Button btnWorkDir;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem MoveLeftToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MoveRightToolStripMenuItem;
     }
 }
 
