@@ -56,13 +56,13 @@
             this.tabMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CloseTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AddTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.MoveLeftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MoveRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this.CopyTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
             this.OpenDirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.MoveLeftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.MoveRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.logMenu.SuspendLayout();
             this.panelOp.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -306,6 +306,25 @@
             this.AddTabToolStripMenuItem.Text = "添加(&A)";
             this.AddTabToolStripMenuItem.Click += new System.EventHandler(this.AddTabToolStripMenuItem_Click);
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(162, 6);
+            // 
+            // MoveLeftToolStripMenuItem
+            // 
+            this.MoveLeftToolStripMenuItem.Name = "MoveLeftToolStripMenuItem";
+            this.MoveLeftToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.MoveLeftToolStripMenuItem.Text = "左移(&L)";
+            this.MoveLeftToolStripMenuItem.Click += new System.EventHandler(this.MoveLeftToolStripMenuItem_Click);
+            // 
+            // MoveRightToolStripMenuItem
+            // 
+            this.MoveRightToolStripMenuItem.Name = "MoveRightToolStripMenuItem";
+            this.MoveRightToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.MoveRightToolStripMenuItem.Text = "右移(&R)";
+            this.MoveRightToolStripMenuItem.Click += new System.EventHandler(this.MoveRightToolStripMenuItem_Click);
+            // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
@@ -330,25 +349,6 @@
             this.OpenDirToolStripMenuItem.Text = "打开目标目录(&D)";
             this.OpenDirToolStripMenuItem.Click += new System.EventHandler(this.OpenDirToolStripMenuItem_Click_1);
             // 
-            // MoveLeftToolStripMenuItem
-            // 
-            this.MoveLeftToolStripMenuItem.Name = "MoveLeftToolStripMenuItem";
-            this.MoveLeftToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
-            this.MoveLeftToolStripMenuItem.Text = "左移(&L)";
-            this.MoveLeftToolStripMenuItem.Click += new System.EventHandler(this.MoveLeftToolStripMenuItem_Click);
-            // 
-            // MoveRightToolStripMenuItem
-            // 
-            this.MoveRightToolStripMenuItem.Name = "MoveRightToolStripMenuItem";
-            this.MoveRightToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
-            this.MoveRightToolStripMenuItem.Text = "右移(&R)";
-            this.MoveRightToolStripMenuItem.Click += new System.EventHandler(this.MoveRightToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(162, 6);
-            // 
             // MonitorView
             // 
             this.AllowDrop = true;
@@ -359,7 +359,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MonitorView";
-            this.Text = "ServiceMonitor 2.3.0";
+            this.Text = "ServiceMonitor 2.3.1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainForm_DragDrop);

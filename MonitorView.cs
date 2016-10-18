@@ -66,7 +66,7 @@ namespace ServiceMonitor
             {
                 m.WriteLog(Color.Yellow, "结束Shell: " + buildcmd);
 
-                RefreshButtonStatus(shellModel);
+                RefreshButtonStatus( );
 
                 if (startAfterDone && shellModel.ExitCode == 0)
                 {
@@ -83,7 +83,7 @@ namespace ServiceMonitor
 
             shellModel.Start();
 
-            RefreshButtonStatus(shellModel);
+            RefreshButtonStatus();
         }
 
         #endregion
@@ -102,8 +102,6 @@ namespace ServiceMonitor
             tabMain.TabPages.Add(page);
 
             model.Index = tabMain.TabPages.IndexOf(page);
-
-            RefreshButtonStatus(model);
 
             tabMain.SelectedTab = page;
             tabMain.MouseClick += (sender, e) =>
@@ -165,19 +163,17 @@ namespace ServiceMonitor
 
         void OnProcessStart(ProcessModel model )
         {            
-            model.WriteLog(Color.Yellow, "进程启动 ");
-
-            RefreshButtonStatus(model);
+            model.WriteLog(Color.Yellow, "进程启动 ");            
         }
 
         void OnProcessStop(ProcessModel model)
         {
-            RefreshButtonStatus(model); 
+            
         }
 
         void OnProcessExit(ProcessModel model)
         {
-            RefreshButtonStatus(model);
+            
 
             model.WriteLog(Color.Yellow, string.Format("进程结束({0})", model.ExitCode) );
         }
@@ -219,26 +215,34 @@ namespace ServiceMonitor
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            SafeGetCurrTableModel().Start();            
+            SafeGetCurrTableModel().Start();
+
+            RefreshButtonStatus();
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            SafeGetCurrTableModel().Stop();            
+            SafeGetCurrTableModel().Stop();
+
+            RefreshButtonStatus();
         }
         private void btnStartAll_Click(object sender, EventArgs e)
         {
-            _controller.StartAllProcess();            
+            _controller.StartAllProcess();
+
+            RefreshButtonStatus();
         }
 
         private void btnStopAll_Click(object sender, EventArgs e)
         {
             _controller.StopAllProcess(false);
+
+            RefreshButtonStatus();
         }
 
         private void tabMain_SelectedIndexChanged(object sender, EventArgs e)
         {
-            RefreshButtonStatus(SafeGetCurrTableModel());
+            RefreshButtonStatus();
         }
 
         private void btnSetWorkDir_Click(object sender, EventArgs e)
@@ -253,8 +257,10 @@ namespace ServiceMonitor
         }
 
         bool _disableTextNotify;
-        void RefreshButtonStatus(ProcessModel pm)
+        void RefreshButtonStatus( )
         {
+            var pm = SafeGetCurrTableModel();
+
             btnStart.Enabled = !pm.Running;
 
             if ( pm.CanStop )
