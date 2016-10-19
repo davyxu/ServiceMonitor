@@ -66,11 +66,10 @@ namespace ServiceMonitor
             {
                 m.WriteLog(Color.Yellow, "结束Shell: " + buildcmd);
 
-                RefreshButtonStatus( );
-
+                // 编译正常时, 启动进程
                 if (startAfterDone && shellModel.ExitCode == 0)
                 {
-                    svcModel.Start();
+                    svcModel.Start();                    
                 }
             };
 
@@ -163,7 +162,9 @@ namespace ServiceMonitor
 
         void OnProcessStart(ProcessModel model )
         {            
-            model.WriteLog(Color.Yellow, "进程启动 ");            
+            model.WriteLog(Color.Yellow, "进程启动 ");
+
+            RefreshButtonStatus();
         }
 
         void OnProcessStop(ProcessModel model)
@@ -173,7 +174,7 @@ namespace ServiceMonitor
 
         void OnProcessExit(ProcessModel model)
         {
-            
+            RefreshButtonStatus();
 
             model.WriteLog(Color.Yellow, string.Format("进程结束({0})", model.ExitCode) );
         }
