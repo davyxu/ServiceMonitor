@@ -45,6 +45,8 @@ namespace ServiceMonitor
     public class ProcessModel
     {
         Process _process;
+        bool _manualStop;
+
         public Control invoker;
 
         public LogView view;
@@ -101,6 +103,9 @@ namespace ServiceMonitor
         // 在tabmain里的顺序
         public int Index { get; set; }
 
+        // 进程自己
+        public bool SelfExit { get; set; }
+
         public ProcessModel( )
         {
             CanStop = true;
@@ -138,6 +143,8 @@ namespace ServiceMonitor
         {
             if (Running)
                 return;
+
+            _manualStop = false;
 
             Running = true;
 
@@ -228,6 +235,11 @@ namespace ServiceMonitor
 
                 SafeCall(delegate
                 {
+                    if (!_manualStop)
+                    {
+                        SelfExit = true;
+                    }
+
                     if (OnExit != null)
                     {                        
                         OnExit(this );
@@ -269,6 +281,9 @@ namespace ServiceMonitor
             {
                 return;
             }
+
+            _manualStop = true;
+            
 
             Running = false;
 

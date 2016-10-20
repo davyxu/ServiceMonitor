@@ -96,6 +96,9 @@
     <Compile Include="TextDialog.Designer.cs">
       <DependentUpon>TextDialog.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="LogView.resx">
+      <DependentUpon>LogView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MonitorView.resx">
       <DependentUpon>MonitorView.cs</DependentUpon>
     </EmbeddedResource>

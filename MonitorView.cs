@@ -16,6 +16,55 @@ namespace ServiceMonitor
             _controller.OnProcessCreate += OnProcessCreate;
 
             InitializeComponent();
+
+            PaintTabControl();
+            
+        }
+
+        void PaintTabControl()
+        {
+            tabMain.DrawMode = TabDrawMode.OwnerDrawFixed;
+            tabMain.DrawItem += (sender, e) =>
+            {
+                var model = SafeGetModel(tabMain.TabPages[e.Index]);
+
+                Rectangle myTabRect = tabMain.GetTabRect(e.Index);
+
+                Brush textBrush = null;
+                Brush bgBrush = null;
+    
+                if ( model.Running )
+                {
+                    bgBrush = ColorSettings.ColorToBrush(Color.Green);
+                    textBrush = ColorSettings.ColorToBrush(Color.White);
+                }
+                else if (model.SelfExit)
+                {
+                    bgBrush = ColorSettings.ColorToBrush(Color.Red);
+                    textBrush = ColorSettings.ColorToBrush(Color.White);
+                }
+             
+
+                if (e.Index == tabMain.SelectedIndex)
+                {
+                    textBrush = ColorSettings.ColorToBrush(Color.White);
+                    bgBrush = ColorSettings.ColorToBrush(Color.Black);
+                }
+                else if (textBrush == null)
+                {
+                    textBrush = ColorSettings.ColorToBrush(Color.Black);
+                }
+
+                if (bgBrush != null )
+                {
+                    e.Graphics.FillRectangle(bgBrush, myTabRect);
+                }
+                
+
+                //先添加TabPage属性      
+                e.Graphics.DrawString(tabMain.TabPages[e.Index].Text, this.Font, textBrush, myTabRect.X + 2, myTabRect.Y + 2);                
+
+            };
         }
 
 
@@ -93,9 +142,10 @@ namespace ServiceMonitor
         {
             var name = Path.GetFileNameWithoutExtension(model.FileName);
 
-            var page = new TabPage(name);
+            var page = new TabPage(name);            
             page.ContextMenuStrip = logMenu;
             var logview = new LogView();
+            page.ToolTipText = model.FileName;
 
             page.Controls.Add(logview);
             tabMain.TabPages.Add(page);
@@ -165,16 +215,20 @@ namespace ServiceMonitor
             model.WriteLog(Color.Yellow, "进程启动 ");
 
             RefreshButtonStatus();
+
+            tabMain.Refresh();
         }
 
         void OnProcessStop(ProcessModel model)
         {
-            
+            tabMain.Refresh();
         }
 
         void OnProcessExit(ProcessModel model)
         {
             RefreshButtonStatus();
+
+            tabMain.Refresh();
 
             model.WriteLog(Color.Yellow, string.Format("进程结束({0})", model.ExitCode) );
         }
