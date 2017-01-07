@@ -34,6 +34,7 @@ namespace ServiceMonitor
             foreach (var item in Items)
             {
                 sb.Append(item.ToString());
+                sb.Append("\n");
             }
 
             return sb.ToString();
