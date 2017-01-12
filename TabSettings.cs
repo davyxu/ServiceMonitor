@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Web.Script.Serialization;
+using System.Windows.Forms;
 
 namespace ServiceMonitor
 {
@@ -15,15 +16,16 @@ namespace ServiceMonitor
 
         public void OnLoad( ProcessModel model )
         {
-            model.FileName = this.FileName;
+
+            model.FileName = Path.GetFullPath(this.FileName);
             model.Args = this.Args;
             model.ManualControl = this.ManualControl;
             model.WorkDir = this.WorkDir;
         }
 
         public void OnSave( ProcessModel model )
-        {
-            this.FileName = model.FileName;
+        {            
+            this.FileName = PathUtil.GetRelativePath(Application.StartupPath, model.FileName);
             this.Args = model.Args;
             this.ManualControl = model.ManualControl;
             this.WorkDir = model.WorkDir;

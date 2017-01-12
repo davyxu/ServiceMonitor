@@ -75,6 +75,7 @@
       <DependentUpon>MonitorView.cs</DependentUpon>
     </Compile>
     <Compile Include="ProcessModel.cs" />
+    <Compile Include="PathUtil.cs" />
     <Compile Include="TabSettings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
