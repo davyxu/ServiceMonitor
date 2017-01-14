@@ -24,8 +24,16 @@ namespace ServiceMonitor
         }
 
         public void OnSave( ProcessModel model )
-        {            
-            this.FileName = PathUtil.GetRelativePath(Application.StartupPath, model.FileName);
+        {   
+            try
+            {
+                this.FileName = PathUtil.GetRelativePath(Application.StartupPath, model.FileName);    
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
             this.Args = model.Args;
             this.ManualControl = model.ManualControl;
             this.WorkDir = model.WorkDir;
