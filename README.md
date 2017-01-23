@@ -55,7 +55,7 @@ go install -v 进程名
 
 博客: http://www.cppblog.com/sunicdavy
 
-知乎: http://www.zhihu.com/people/xu-bo-62-87
+知乎: http://www.zhihu.com/people/sunicdavy
 
 bug,特性提交: https://github.com/davyxu/ServiceMonitor/issues
 
