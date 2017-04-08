@@ -57,12 +57,22 @@ namespace ServiceMonitor
 
                 var brush = ColorSettings.ColorToBrush(data.FontColor);
 
-                e.Graphics.DrawString( // Draw the appropriate text in the ListBox
+                try
+                {
+                    // 文本太长时, 这里会造成崩溃
+                    e.Graphics.DrawString( // Draw the appropriate text in the ListBox
                     data.Text, // The message linked to the item
                     Font, // Take the font from the listbox
                     brush, // Set the color 
                     e.Bounds // Y pixel coordinate.  Multiply the index by the ItemHeight defined in the listbox.
                 );
+                }
+                catch
+                {
+
+                }
+
+                
 
             }
             else
