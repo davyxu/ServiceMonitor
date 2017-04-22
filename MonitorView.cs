@@ -364,6 +364,14 @@ namespace ServiceMonitor
             Clipboard.SetText(text);
         }
 
+        private void ShowLineTextToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var text = SafeGetCurrTableModel().GetSelectedContext();
+
+            var dialog = new TextDialog(text);
+            dialog.ShowDialog();
+        }
+
         private void LogSaveToFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog();
@@ -531,6 +539,8 @@ namespace ServiceMonitor
 
 
         #endregion
+
+
 
 
 

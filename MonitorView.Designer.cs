@@ -32,7 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MonitorView));
             this.tabMain = new System.Windows.Forms.TabControl();
             this.logMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.CopyLineTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ShowLneTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LogSaveToFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.BuildRunFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,7 +83,8 @@
             // logMenu
             // 
             this.logMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CopyLineTextToolStripMenuItem,
+            this.toolStripMenuItem7,
+            this.ShowLneTextToolStripMenuItem,
             this.LogSaveToFileToolStripMenuItem,
             this.toolStripMenuItem4,
             this.BuildRunFToolStripMenuItem,
@@ -95,15 +97,21 @@
             this.AutoScrollToolStripMenuItem,
             this.ManualStartToolStripMenuItem});
             this.logMenu.Name = "contextMenuStrip1";
-            this.logMenu.Size = new System.Drawing.Size(160, 220);
+            this.logMenu.Size = new System.Drawing.Size(160, 242);
             this.logMenu.Opening += new System.ComponentModel.CancelEventHandler(this.mnuTab_Opening);
             // 
-            // CopyLineTextToolStripMenuItem
+            // toolStripMenuItem7
             // 
-            this.CopyLineTextToolStripMenuItem.Name = "CopyLineTextToolStripMenuItem";
-            this.CopyLineTextToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.CopyLineTextToolStripMenuItem.Text = "复制行文字(&O)";
-            this.CopyLineTextToolStripMenuItem.Click += new System.EventHandler(this.CopyLineTextToolStripMenuItem_Click);
+            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(159, 22);
+            this.toolStripMenuItem7.Text = "复制行文字(&O)";
+            // 
+            // ShowLneTextToolStripMenuItem
+            // 
+            this.ShowLneTextToolStripMenuItem.Name = "ShowLneTextToolStripMenuItem";
+            this.ShowLneTextToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.ShowLneTextToolStripMenuItem.Text = "显示行文字(&D)";
+            this.ShowLneTextToolStripMenuItem.Click += new System.EventHandler(this.ShowLineTextToolStripMenuItem_Click);
             // 
             // LogSaveToFileToolStripMenuItem
             // 
@@ -359,7 +367,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MonitorView";
-            this.Text = "ServiceMonitor 2.4.4";
+            this.Text = "ServiceMonitor 2.4.5";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainForm_DragDrop);
@@ -387,7 +395,7 @@
         private System.Windows.Forms.TextBox txtArgs;
         private System.Windows.Forms.ToolStripMenuItem ClearToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem CopyLineTextToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ShowLneTextToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem LogSaveToFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ClearAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AutoScrollToolStripMenuItem;
@@ -408,6 +416,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem MoveLeftToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem MoveRightToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
     }
 }
 

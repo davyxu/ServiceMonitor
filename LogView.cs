@@ -1,6 +1,10 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace ServiceMonitor
@@ -94,6 +98,39 @@ namespace ServiceMonitor
 
         }
 
+        bool ParseLineText(string text, out string filename, out string line )
+        {
+            var regex = new Regex(@"(?<file>\w*:[/\S]*):(?<line>\d\d)", RegexOptions.IgnoreCase
+| RegexOptions.CultureInvariant
+| RegexOptions.IgnorePatternWhitespace
+| RegexOptions.Compiled);
+            var result = regex.Match(text);
+            if (result.Success)
+            {
+                filename = result.Groups["file"].Value;
+                line = result.Groups["line"].Value;
+                return true;
+            }
+
+            filename = "";
+                line = "";
+
+            return false;
+        }
+
+        static bool OpenFile(string filename, string line)
+        {
+            if (!File.Exists(filename))
+                return false;
+
+
+            var nppDir = (string)Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Notepad++", null, null);
+            var nppExePath = Path.Combine(nppDir, "Notepad++.exe");
+            Process.Start(nppExePath, string.Format("\"{0}\" -n{1}", filename, line));
+
+            return true;
+        }
+
         void OnDoubleClick(object sender, EventArgs e)
         {
             var ee = e as MouseEventArgs;
@@ -104,8 +141,12 @@ namespace ServiceMonitor
 
                 var logdata = SelectedItem as LogData;
 
-                var dialog = new TextDialog(logdata.Text);
-                dialog.ShowDialog();
+                string filename, line;
+                if ( ParseLineText( logdata.Text,  out filename, out line))
+                {
+                    OpenFile(filename, line);                    
+                }               
+
             }
             catch (Exception)
             {
