@@ -144,8 +144,13 @@ namespace ServiceMonitor
                 string filename, line;
                 if ( ParseLineText( logdata.Text,  out filename, out line))
                 {
-                    OpenFile(filename, line);                    
-                }               
+                    OpenFile(filename, line);
+                }
+                else
+                {
+                    var dialog = new TextDialog(logdata.Text);
+                    dialog.ShowDialog();
+                }
 
             }
             catch (Exception)
