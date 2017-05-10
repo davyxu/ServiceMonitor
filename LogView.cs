@@ -98,9 +98,9 @@ namespace ServiceMonitor
 
         }
 
-        bool ParseLineText(string text, out string filename, out string line )
+        public static bool ParseLineText(string text, out string filename, out string line )
         {
-            var regex = new Regex(@"(?<file>\w*:[/\S]*):(?<line>\d\d)", RegexOptions.IgnoreCase
+            var regex = new Regex(@"(?<file>\w*:[/\S]*):(?<line>\d*)", RegexOptions.IgnoreCase
 | RegexOptions.CultureInvariant
 | RegexOptions.IgnorePatternWhitespace
 | RegexOptions.Compiled);
