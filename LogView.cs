@@ -125,6 +125,12 @@ namespace ServiceMonitor
 
 
             var nppDir = (string)Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Notepad++", null, null);
+
+            if ( string.IsNullOrEmpty(nppDir))
+            {
+                nppDir = "c:\\Program Files (x86)\\Notepad++";                
+            }
+
             var nppExePath = Path.Combine(nppDir, "Notepad++.exe");
             Process.Start(nppExePath, string.Format("\"{0}\" -n{1}", filename, line));
 
@@ -142,16 +148,12 @@ namespace ServiceMonitor
                 var logdata = SelectedItem as LogData;
 
                 string filename, line;
-                if ( ParseLineText( logdata.Text,  out filename, out line))
-                {
-                    OpenFile(filename, line);
-                }
-                else
+                if (!ParseLineText(logdata.Text, out filename, out line) || !OpenFile(filename, line))
                 {
                     var dialog = new TextDialog(logdata.Text);
                     dialog.ShowDialog();
-                }
-
+                }                
+                    
             }
             catch (Exception)
             {

@@ -45,7 +45,6 @@
             this.ClearAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AutoScrollToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ManualStartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panelOp = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.txtArgs = new System.Windows.Forms.TextBox();
             this.btnWorkDir = new System.Windows.Forms.Button();
@@ -53,7 +52,6 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.btnStopAll = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tabMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CloseTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AddTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,18 +63,15 @@
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
             this.OpenDirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logMenu.SuspendLayout();
-            this.panelOp.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             this.tabMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabMain
             // 
-            this.tabMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabMain.Location = new System.Drawing.Point(3, 3);
+            this.tabMain.Location = new System.Drawing.Point(0, 0);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
-            this.tabMain.Size = new System.Drawing.Size(856, 517);
+            this.tabMain.Size = new System.Drawing.Size(804, 426);
             this.tabMain.TabIndex = 0;
             this.tabMain.SelectedIndexChanged += new System.EventHandler(this.tabMain_SelectedIndexChanged);
             // 
@@ -186,26 +181,10 @@
             this.ManualStartToolStripMenuItem.Text = "手动启动";
             this.ManualStartToolStripMenuItem.Click += new System.EventHandler(this.ManualStartToolStripMenuItem_Click);
             // 
-            // panelOp
-            // 
-            this.panelOp.AutoScroll = true;
-            this.panelOp.Controls.Add(this.label1);
-            this.panelOp.Controls.Add(this.txtArgs);
-            this.panelOp.Controls.Add(this.btnWorkDir);
-            this.panelOp.Controls.Add(this.btnStartAll);
-            this.panelOp.Controls.Add(this.btnStart);
-            this.panelOp.Controls.Add(this.btnStopAll);
-            this.panelOp.Controls.Add(this.btnStop);
-            this.panelOp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelOp.Location = new System.Drawing.Point(3, 526);
-            this.panelOp.Name = "panelOp";
-            this.panelOp.Size = new System.Drawing.Size(856, 29);
-            this.panelOp.TabIndex = 2;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(169, 8);
+            this.label1.Location = new System.Drawing.Point(166, 441);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 12);
             this.label1.TabIndex = 2;
@@ -213,15 +192,15 @@
             // 
             // txtArgs
             // 
-            this.txtArgs.Location = new System.Drawing.Point(228, 3);
+            this.txtArgs.Location = new System.Drawing.Point(231, 438);
             this.txtArgs.Name = "txtArgs";
-            this.txtArgs.Size = new System.Drawing.Size(231, 21);
+            this.txtArgs.Size = new System.Drawing.Size(323, 21);
             this.txtArgs.TabIndex = 1;
             this.txtArgs.TextChanged += new System.EventHandler(this.txtArgs_TextChanged);
             // 
             // btnWorkDir
             // 
-            this.btnWorkDir.Location = new System.Drawing.Point(465, 3);
+            this.btnWorkDir.Location = new System.Drawing.Point(560, 436);
             this.btnWorkDir.Name = "btnWorkDir";
             this.btnWorkDir.Size = new System.Drawing.Size(75, 23);
             this.btnWorkDir.TabIndex = 0;
@@ -231,7 +210,7 @@
             // 
             // btnStartAll
             // 
-            this.btnStartAll.Location = new System.Drawing.Point(691, 3);
+            this.btnStartAll.Location = new System.Drawing.Point(641, 436);
             this.btnStartAll.Name = "btnStartAll";
             this.btnStartAll.Size = new System.Drawing.Size(75, 23);
             this.btnStartAll.TabIndex = 0;
@@ -241,7 +220,7 @@
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(7, 3);
+            this.btnStart.Location = new System.Drawing.Point(6, 436);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.TabIndex = 0;
@@ -251,7 +230,7 @@
             // 
             // btnStopAll
             // 
-            this.btnStopAll.Location = new System.Drawing.Point(772, 3);
+            this.btnStopAll.Location = new System.Drawing.Point(720, 436);
             this.btnStopAll.Name = "btnStopAll";
             this.btnStopAll.Size = new System.Drawing.Size(75, 23);
             this.btnStopAll.TabIndex = 0;
@@ -261,29 +240,13 @@
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(88, 3);
+            this.btnStop.Location = new System.Drawing.Point(87, 436);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(75, 23);
             this.btnStop.TabIndex = 0;
             this.btnStop.Text = "停止";
             this.btnStop.UseVisualStyleBackColor = true;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.panelOp, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tabMain, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(862, 558);
-            this.tableLayoutPanel1.TabIndex = 1;
             // 
             // tabMenu
             // 
@@ -363,33 +326,38 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(862, 558);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.ClientSize = new System.Drawing.Size(805, 467);
+            this.Controls.Add(this.txtArgs);
+            this.Controls.Add(this.btnStop);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnStopAll);
+            this.Controls.Add(this.btnStart);
+            this.Controls.Add(this.btnStartAll);
+            this.Controls.Add(this.btnWorkDir);
+            this.Controls.Add(this.tabMain);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "MonitorView";
-            this.Text = "ServiceMonitor 2.4.5";
+            this.Text = "ServiceMonitor 2.4.6";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainForm_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainForm_DragEnter);
             this.logMenu.ResumeLayout(false);
-            this.panelOp.ResumeLayout(false);
-            this.panelOp.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
             this.tabMenu.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.TabControl tabMain;
-        private System.Windows.Forms.Panel panelOp;
         private System.Windows.Forms.Button btnStartAll;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnStopAll;
         private System.Windows.Forms.Button btnStop;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ContextMenuStrip logMenu;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtArgs;
